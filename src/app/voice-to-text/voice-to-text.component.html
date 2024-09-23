@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Voice to Text</h2>
+
+  <div class="controls">
+    <button (click)="startListening()" [disabled]="isListening" class="btn start">
+      <i class="material-icons">mic</i> Start Listening
+    </button>
+    <button (click)="stopListening()" [disabled]="!isListening" class="btn stop">
+      <i class="material-icons">mic_off</i> Stop Listening
+    </button>
+  </div>
+
+  <div *ngIf="transcript" class="transcript-box">
+    <h3>Transcript</h3>
+    <p class="transcript">{{ transcript }}</p>
+  </div>
+</div>
