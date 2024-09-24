@@ -1,2 +1,12 @@
-<app-voice-to-text></app-voice-to-text>
+<ul class="nav-list">
+    <li (click)="title='Voice to Text'">Voice to Text <span *ngIf="title=='Voice to Text'">*</span></li>
+    <li (click)="title='Text to Voice'">Text to Voice <span *ngIf="title=='Text to Voice'">*</span></li>
+</ul>
+
+<ng-container *ngIf="title=='Voice to Text'">
+    <app-voice-to-text></app-voice-to-text>
+</ng-container>
+<ng-container *ngIf="title=='Text to Voice'">
+    <app-text-to-voice></app-text-to-voice>
+</ng-container>
 <router-outlet />

@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .controls {
+    margin-bottom: 20px;
+  }
+  
+  select {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn.speak {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .btn.speak:hover {
+    background-color: #43a047;
+  }
+  
+  .btn.stop {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  .btn.stop:hover {
+    background-color: #e53935;
+  }
+  

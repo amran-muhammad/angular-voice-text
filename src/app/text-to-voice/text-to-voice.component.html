@@ -1,0 +1,18 @@
+<div class="container">
+    <h2>Text to Voice</h2>
+  
+    <textarea [(ngModel)]="text" placeholder="Enter text here" rows="5"></textarea>
+  
+    <div class="controls" *ngIf="text && text.includes(' ')">
+      <label for="voiceSelect">Select Voice:</label>
+      <select id="voiceSelect" [(ngModel)]="selectedVoice">
+        <option *ngFor="let voice of voices" [ngValue]="voice">{{ voice.name }} ({{ voice.lang }})</option>
+      </select>
+    </div>
+  
+    <div class="buttons">
+      <button (click)="speak()" class="btn speak">Speak</button>
+      <button (click)="stop()" class="btn stop">Stop</button>
+    </div>
+  </div>
+  

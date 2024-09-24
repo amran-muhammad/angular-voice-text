@@ -13,6 +13,10 @@ export class VoiceToTextComponent {
   transcript: string = '';
   isListening: boolean = false;
 
+  synth: SpeechSynthesis;
+  voices: SpeechSynthesisVoice[] = [];
+  selectedVoice: SpeechSynthesisVoice | null = null;
+
   constructor(private ngZone: NgZone) {
     const { webkitSpeechRecognition }: any = window as any;
     this.recognition = new webkitSpeechRecognition();
@@ -38,6 +42,13 @@ export class VoiceToTextComponent {
       this.isListening = false;
       console.error(event.error);
     };
+
+    this.synth = window.speechSynthesis;
+
+    // Load available voices
+    this.synth.onvoiceschanged = () => {
+      this.voices = this.synth.getVoices();
+    };
   }
 
   startListening() {
@@ -48,6 +59,20 @@ export class VoiceToTextComponent {
   stopListening() {
     this.isListening = false;
     this.recognition.stop();
+  }
+
+  play(){
+    if (this.transcript.trim()) {
+      const utterance = new SpeechSynthesisUtterance(this.transcript);
+
+      // Use the selected voice if available
+      if (this.selectedVoice) {
+        utterance.voice = this.selectedVoice;
+      }
+
+      // Speak the text
+      this.synth.speak(utterance);
+    }
   }
 }
 
