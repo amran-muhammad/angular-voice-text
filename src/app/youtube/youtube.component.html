@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Youtube Videos</h2>
+  <h3>{{sheetUrl}}</h3>
+  <div class="controls" *ngIf="sheetData.length > 0">
+    <div style="display: grid;">
+      <div *ngFor="let row of sheetData">
+        <h3>{{ row.title }}</h3>
+        <iframe width="560" height="315" [src]="getEmbedUrl(row.link)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
