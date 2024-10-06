@@ -13,6 +13,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class YoutubeComponent {
   sheetData: Array<any> = [];
   sheetUrl: string | null = '';
+  docUrl: string | null = 'https://docs.google.com/spreadsheets/d/1bz17durrhp71Yxh29lMpj6XnWYLjYEIovWl4PN9IMBw/edit?usp=sharing';
   constructor(public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
