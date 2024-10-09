@@ -1,49 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-text-to-voice',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './text-to-voice.component.html',
-  styleUrl: './text-to-voice.component.scss'
+  styleUrls: ['./text-to-voice.component.scss']
 })
-export class TextToVoiceComponent {
+export class TextToVoiceComponent implements OnInit {
   text: string = '';
-  synth: SpeechSynthesis;
+  synth: SpeechSynthesis = window.speechSynthesis;
   voices: SpeechSynthesisVoice[] = [];
   selectedVoice: SpeechSynthesisVoice | null = null;
 
-  constructor() {
-    this.synth = window.speechSynthesis;
+  constructor() {}
 
-    // Load available voices
-    this.synth.onvoiceschanged = () => {
-      this.voices = this.synth.getVoices();
-    };
+  ngOnInit(): void {
+    this.loadVoices();
+    // Ensure voices are loaded across different browsers
+    if (this.synth.onvoiceschanged !== undefined) {
+      this.synth.onvoiceschanged = () => this.loadVoices();
+    }
+  }
+
+  // Load available voices from the SpeechSynthesis API
+  loadVoices(): void {
+    this.voices = this.synth.getVoices();
+    if (this.voices.length) {
+      this.selectedVoice = this.voices[0]; // Set a default voice
+    }
   }
 
   // Function to speak the text
-  speak() {
+  speak(): void {
     if (this.text.trim()) {
       const utterance = new SpeechSynthesisUtterance(this.text);
-
-      // Use the selected voice if available
       if (this.selectedVoice) {
         utterance.voice = this.selectedVoice;
       }
-
-      // Speak the text
       this.synth.speak(utterance);
     }
   }
 
   // Function to stop speaking
-  stop() {
+  stop(): void {
     if (this.synth.speaking) {
       this.synth.cancel();
     }
   }
 }
-
